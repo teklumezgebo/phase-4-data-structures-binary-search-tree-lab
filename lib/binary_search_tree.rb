@@ -8,11 +8,59 @@ class BinarySearchTree
   end
 
   def search(value)
-    # your code here
+    if root == nil
+      return nil
+    end
+
+    nodes_to_vist = [root]
+
+    while nodes_to_vist.length > 0
+      node = nodes_to_vist.shift
+
+      if node.left 
+        nodes_to_vist.push(node.left)
+      end
+
+      if node.right
+        nodes_to_vist.push(node.right)
+      end
+
+      if node.value == value
+        return node
+      end
+    end
   end
 
   def insert(value)
-    # your code here
+    node = Node.new(value)
+
+    if root == nil
+      @root = node
+    end
+
+    nodes_to_vist = [root]
+
+    while nodes_to_vist > 0
+      inspected_node = nodes_to_vist.shift
+      puts nodes_to_vist
+
+      if value < inspected_node.value
+        if inspected_node.left
+          nodes_to_vist.push(inspected_node.left)
+        else 
+          inspected_node.left = node
+        end
+      else
+        if inspected_node.right
+          nodes_to_vist.push(inspected_node.right)
+        else
+          inspected_node.right = node
+        end
+      end
+    end
+
+
+    node
   end
 
 end 
